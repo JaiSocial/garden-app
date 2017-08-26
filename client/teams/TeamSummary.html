@@ -1,0 +1,16 @@
+<template name="TeamSummary">
+	<article class="team">
+		<h3>{{name}}</h3>
+		<span>{{plot_number}}</span>
+		<span>{{donations}} lbs.</span>
+		<span>Members:</span>				
+		{{#each coaches}}
+			<p><a href="mailto:{{email_address}}?Subject='{{name}}'">{{first_name}} {{last_name}}</a></p>			
+			<i class="fa fa-mobile" aria-hidden="true" title="primary phone"> </i>  {{phone_number_1}}			
+			<br>
+			<i class="fa fa-phone" aria-hidden="true" title="secondary phone"> </i> {{phone_number_2}}
+			<br>
+			<br>
+		{{/each}}
+	</article>
+</template>

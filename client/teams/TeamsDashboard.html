@@ -1,0 +1,11 @@
+<template name="TeamsDashboard">
+	<section class="teams">
+		{{# if Template.subscriptionsReady}}
+			{{#each teams}}
+				{{> TeamSummary}}
+			{{/each}}
+		{{else}}
+		<p>Loading</p>
+		{{/if}}
+	</section>
+</template>

@@ -1,0 +1,23 @@
+<template name="SeasonDetails">
+	{{# if Template.subscriptionsReady}}
+		<h1>{{season.name}}</h1>
+		<p>{{season.desc}}</p>
+		<p>{{season.start_month}}/{{season.start_year}} - {{season.end_month}}/{{season.end_year}}</p> 
+		<table class="table table-condensed table-striped">
+			<tr>
+				<th>Plot Number</th>
+				<th>Team Name</th>
+				<th>Donations</th>
+			</tr>
+			{{#each season.teams}}
+			<tr>
+				<td>{{plot_number}}</td>
+				<td><a href="/team/{{team_id}}">{{name}}</a></td>
+				<td>{{donations}} lbs.</td>			
+			</tr>
+	 		{{/each}}
+ 		</table>
+	{{else}}
+		<p>Loading...</p>
+	{{/if}}
+</template>

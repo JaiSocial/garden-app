@@ -1,0 +1,12 @@
+<template name="SeasonSummary">
+	<article class="season">
+		{{# if Template.subscriptionsReady}}
+			<h3>{{name}}</h3>
+			<p>{{desc}}</p>
+			<p>{{start_month}}/{{start_year}} - {{end_month}}/{{end_year}}</p>
+			<a href="/season/{{season_id}}">View Details</a>
+		{{else}}
+			<p>Loading....</p>
+		{{/if}}
+	</article>
+</template>
