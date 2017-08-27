@@ -19,7 +19,7 @@ def generate_person_documents():
 
         string_i = str(i)
 
-        person_id  = string_i
+        person_id  = i
         first_name = 'first_name_' + string_i
         last_name  = 'last_name_' + string_i
         phone_1    = '1-800-800-8001'
