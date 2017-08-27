@@ -1,22 +1,23 @@
 <template name="TeamDetails">
 	{{#if Template.subscriptionsReady}}
-		<h1>{{name}}</h1>
-		<p>{{plot_number}}</p>
-		<h3>Members</h3>	
-		{{#each member_list}}
-			<article class="member">
+		<h1>{{team.name}} (plot # {{team.plot_number}})</h1>
+		<h3>Members</h3>
+		<br>
+		{{#each team.member_list}}
+			<article class="team">
+				<!-- <br> -->
 				<p><a href="mailto:{{email_address}}?Subject='{{name}}'">{{first_name}} {{last_name}}</a></p>
-				<br>
-				<i class="fa fa-mobile" aria-hidden="true" title="primary phone"> </i>  {{phone_number_1}}			
-				<br>
-				<i class="fa fa-phone" aria-hidden="true" title="secondary phone"> </i> {{phone_number_2}}
+				<!-- <br> -->
+				<p><i class="fa fa-mobile" aria-hidden="true" title="primary phone"> </i>  {{phone_number_1}}</p>
+				<!-- <br> -->
+				<p><i class="fa fa-phone" aria-hidden="true" title="secondary phone"> </i> {{phone_number_2}}</p>
 			</article>
 		{{else}}
 			<span>No registered members.</span>
 		{{/each}}
-		<br>
 		<h3>Donations</h3>
-		{{#each donation_list}}
+		<br>
+		{{#each team.donation_list}}
 		<article class="donation">
 			<p>{{desc}}</p>
 			<br>
@@ -27,9 +28,9 @@
 		{{else}}
 			<span>No donations.</span>
 		{{/each}}
-		<br>
 		<h3>Plants</h3>
-		{{#each plant_list}}
+		<br>
+		{{#each team.plant_list}}
 			<article class="donation">
 				<p>{{desc}}</p>
 				<br>

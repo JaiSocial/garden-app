@@ -3,11 +3,13 @@ Template.TeamDetails.onCreated(function (){
 	var self = this;
 
 	self.autorun(function(){
-		self.subscribe('garden_app_plants');
+		// self.subscribe('garden_app_plants');
 		self.subscribe('garden_app_donations');
 		self.subscribe('garden_app_teams');
 		self.subscribe('garden_app_persons');
-	})
+	});
+
+	console.log("In TeamDetails.onCreated method");
 });
 
 
@@ -17,6 +19,8 @@ Template.TeamDetails.helpers({
 
 		const id = FlowRouter.getParam('id');
 
+		console.log("id : " + id);
+
 		const team_id = parseInt(id);
 
 		console.log("team_id : " + team_id);
@@ -25,7 +29,7 @@ Template.TeamDetails.helpers({
 
 		console.log("team : "  + team);
 
-		const member_list = _get_member_list_by_team(team);
+		const member_list = _get_person_list_by_team(team);
 
 		team.member_list = member_list;
 
@@ -39,7 +43,6 @@ Template.TeamDetails.helpers({
 
 		return team;
 	}
-
 });
 
 function _get_team_by_team_id(team_id){
@@ -72,6 +75,8 @@ function _get_donation_list_by_team(team){
 
 	const donation_id_list = team.donation_ids;
 
+	const team_id = team.team_id;
+	
 	let donation_list = [];
 
 	donation_id_list.forEach(function(donation_id){
@@ -97,13 +102,17 @@ function _get_donation_list_by_team(team){
 
 function _get_person_list_by_team(team){
 
-	const person_id_list = team.person_ids;
+	const person_id_list = team.member_ids;
 
 	let person_list = [];
 
+	const team_id = team.team_id;
+
 	person_id_list.forEach(function(person_id){
 
-		let person = Donations.findOne({"person_id" : person_id}, {"_id" : 0});
+		person_id = parseInt(person_id);
+
+		let person = Persons.findOne({"person_id" : person_id}, {"_id" : 0});
 
 		if (person === undefined){
 		
@@ -126,6 +135,8 @@ function _get_plant_list_by_team(team){
 
 	const plant_id_list = team.plant_ids;
 
+	const team_id = team.team_id;
+	
 	let plant_list = [];
 
 	plant_id_list.forEach(function(plant_id){
