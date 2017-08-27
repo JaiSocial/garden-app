@@ -3,7 +3,7 @@ Template.TeamDetails.onCreated(function (){
 	var self = this;
 
 	self.autorun(function(){
-		// self.subscribe('garden_app_plants');
+		self.subscribe('garden_app_plants');
 		self.subscribe('garden_app_donations');
 		self.subscribe('garden_app_teams');
 		self.subscribe('garden_app_persons');
@@ -37,9 +37,7 @@ Template.TeamDetails.helpers({
 
 		team.donation_list = donation_list;
 
-		// const plant_list = _get_plant_list_by_team(team) ;
-
-		// team.plant_list = plant_list;
+		team.plant_list = _get_plant_list_by_team(team);
 
 		return team;
 	}
