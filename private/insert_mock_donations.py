@@ -5,8 +5,17 @@ mongodb_url = '127.0.0.1'
 mongodb_port = '3001'
 mongodb_connection_url = 'mongodb://' + mongodb_url + ':' + mongodb_port + '/meteor'
 
-MAX_TEAM_NUMBER = 17
+## This is the first team number
 MIN_TEAM_NUMBER = 1
+
+## This is the last team number
+MAX_TEAM_NUMBER = 17
+
+## This is the number of donations to mock-up per team
+NUMBER_DONATIONS_PER_TEAM = 10
+
+## This is the maximum number of donations that need to get mocked-up
+MAX_DONATIONS = MAX_TEAM_NUMBER * NUMBER_DONATIONS_PER_TEAM
 
 test_mode = False
 
@@ -20,7 +29,7 @@ def generate_donation_documents():
 
     donation_ctr = 1
 
-    for i in range(50):
+    for i in range(MAX_DONATIONS):
 
         string_i = str(i)
 

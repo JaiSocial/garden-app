@@ -5,6 +5,17 @@ mongodb_url = '127.0.0.1'
 mongodb_port = '3001'
 mongodb_connection_url = 'mongodb://' + mongodb_url + ':' + mongodb_port + '/meteor'
 
+## This is the first team number
+MIN_TEAM_NUMBER = 1
+
+## This is the last team number
+MAX_TEAM_NUMBER = 17
+
+## This is the number of people to mock-up per team
+NUMBER_PEOPLE_PER_TEAM = 10
+
+## This is the maximum number of people that need to get mocked-up
+MAX_PEOPLE = MAX_TEAM_NUMBER * NUMBER_PEOPLE_PER_TEAM
 
 test_mode = False
 
@@ -14,11 +25,11 @@ persons_list = []
 
 def generate_person_documents():
 
+    team_id = MIN_TEAM_NUMBER
 
-    team_id = 1
     member_ctr = 1
 
-    for i in range(50):
+    for i in range(MAX_PEOPLE):
 
         string_i = str(i)
 
@@ -49,8 +60,14 @@ def generate_person_documents():
         persons_list.append(person)
 
         if member_ctr == 10:
+
             team_id += 1
+            
             member_ctr = 1
+
+            if team_id >= MAX_TEAM_NUMBER:
+                team_id = MIN_TEAM_NUMBER
+
         else:
             member_ctr += 1 
 
