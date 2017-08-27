@@ -3,8 +3,8 @@ Template.TeamsDashboard.onCreated(function (){
 	var self = this;
 
 	self.autorun(function(){
-		self.subscribe('teams');
-		self.subscribe('persons');
+		self.subscribe('garden_app_teams');
+		self.subscribe('garden_app_persons');
 	})
 });
 
@@ -12,69 +12,67 @@ Template.TeamsDashboard.helpers({
 
 	teams: () => {
 
-		const coach_lookup = _getCoachIdToCoachLookup();
+		const person_lookup = _getPersonIdToPersonLookup();
 
 		let team_documents = Teams.find({});
 		
 		if (team_documents === undefined){
-			throw new Error("teams was not defined");
+			throw new Error("Could not retrieve documents for teams collection");
 		}
 
-		// console.log("going to process the team documents");
+		// const team_doc_count = team_documents.length;
 
-		// console.log(team_documents);
+		// console.log("Retrieved '" + team_doc_count +"' documents from garden_app_teams");
 		
-		// console.log("teams count is " + team_documents.length);
+		// console.log(team_documents);
 
-		let final_team_list = [];
+		// if (team_doc_count > 0){
 
-		team_documents.forEach(function(team){
+			let team_ctr = 0;
 
-			const coach_ids = team.coach_ids;
+			team_documents.forEach(function(team){
 
-			console.log("coach ids:" + coach_ids);
+				team_ctr++;
 
-			team.coaches = [];
+				const member_ids = team.member_ids;
 
-			coach_ids.forEach(function(coach_set){
-				
-				const coach_id = coach_set.coach_id;
-				const coach_role = coach_set.role;
-				console.log("coach_id '" + coach_id + "' role '" + coach_role + "'");
-
-				if (coach_lookup[coach_id] === undefined){
-
-					throw new Error("coach_id '" + coach_id + "' does not exist in the lookup");
+				if (member_ids === undefined){
+					throw new Error("team.member_ids is not defined for team with team_id '" + team.team_id + "'");
 				}
-				else {
 
-					const coach = coach_lookup[coach_id];
+				team.member_list = [];
 
-					if (coach_role == 'main'){
-						coach.coach_title = "Coach";
+				member_ids.forEach(function(id){
+
+					if (person_lookup[id] !== undefined){
+						
+						const person = person_lookup[id];
+
+						team.member_list.push(person);
 					}
-					else {
-						coach.coach_title = "Assistant";
-					}
-
-					team.coaches.push(coach);
-				}
+				});
 			});
 
-			final_team_list.push(team);
-		});
+			console.log("Loaded '" + team_ctr + "' teams intothe team lookup");
+		// }
+		// else {
+		// 	console.log("Looks like there are no documents in the garden_app_teams collection");
+		// }
 
-		return final_team_list;
+		return team_documents;
 	}
 })
 
-Template.TeamsDashboard.events({
-});
+Template.TeamsDashboard.events({});
 
 
 function _getPersonIdToPersonLookup(){
 
 	const person_documents = Persons.find({});
+
+	if (person_documents === undefined){
+		throw new Error("Could not retrieve documents for the persons collection");
+	}
 
 	let lookup = {};
 
@@ -86,47 +84,6 @@ function _getPersonIdToPersonLookup(){
 	});
 
 	console.log("loaded the person lookup");
-
-	return lookup;
-}
-
-
-function _getCoachIdToCoachLookup(){
-
-	const coach_documents = Coaches.find({});
-
-	let lookup = {};
-
-	const person_lookup = _getPersonIdToPersonLookup();
-
-	coach_documents.forEach(function(coach){
-
-		const coach_id = coach.coach_id;
-		
-		const person_id = coach.person_id;
-		
-		if (person_lookup[person_id] === undefined){
-			throw new Error("person_id '" + person_id + "' does not exist in the lookup");
-		}
-		else {
-
-			const person_document = person_lookup[person_id];
-			
-			coach.first_name = person_document.first_name;
-			
-			coach.last_name = person_document.last_name;
-			
-			coach.email_address = person_document.email_address;
-
-			coach.phone_number_1 = person_document.phone_number_1;
-
-			coach.phone_number_2 = person_document.phone_number_2;
-
-			lookup[coach_id] = coach;
-		}
-	});
-
-	console.log("loaded the coach lookup");
 
 	return lookup;
 }
