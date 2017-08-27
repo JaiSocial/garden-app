@@ -8,6 +8,19 @@ Template.SeasonsDashboard.onCreated(function (){
 
 Template.SeasonsDashboard.helpers({
 	seasons: () => {
-		return Seasons.find({});
+		
+		let seasons = Seasons.find({});
+
+		if (seasons === undefined){
+		
+			const error_msg = "seasons was not defined";
+		
+			console.error(error_msg);
+		
+			throw new Error(error_msg);
+		}		
+
+		return seasons;
 	}
 });
+
