@@ -9,11 +9,11 @@
 				<th>Team Name</th>
 				<th>Donations</th>
 			</tr>
-			{{#each season.teams}}
+			{{#each season.team_list}}
 			<tr>
 				<td>{{plot_number}}</td>
 				<td><a href="/team/{{team_id}}">{{name}}</a></td>
-				<td>{{donations}} lbs.</td>			
+				<td>{{donation_sum}} lbs.</td>			
 			</tr>
 	 		{{/each}}
  		</table>
