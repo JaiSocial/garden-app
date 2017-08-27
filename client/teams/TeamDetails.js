@@ -19,25 +19,15 @@ Template.TeamDetails.helpers({
 
 		const id = FlowRouter.getParam('id');
 
-		console.log("id : " + id);
-
 		const team_id = parseInt(id);
-
-		console.log("team_id : " + team_id);
 
 		let team = _get_team_by_team_id(team_id);
 
-		console.log("team : "  + team);
+		team.member_list = _get_person_list_by_team_id(team_id);
 
-		const member_list = _get_person_list_by_team(team);
+		team.donation_list = _get_donation_list_by_team_id(team_id);
 
-		team.member_list = member_list;
-
-		const donation_list = _get_donation_list_by_team(team);
-
-		team.donation_list = donation_list;
-
-		team.plant_list = _get_plant_list_by_team(team);
+		team.plant_list = _get_plant_list_by_team_id(team_id);
 
 		return team;
 	}
@@ -69,93 +59,25 @@ function _get_team_by_team_id(team_id){
 }
 
 
-function _get_donation_list_by_team(team){
+function _get_donation_list_by_team_id(team_id){
 
-	const donation_id_list = team.donation_ids;
+	const donations = Donations.find({"team_id" : team_id}, {"_id" : 0});
 
-	const team_id = team.team_id;
-	
-	let donation_list = [];
-
-	donation_id_list.forEach(function(donation_id){
-
-		let donation = Donations.findOne({"donation_id" : donation_id}, {"_id" : 0});
-
-		if (donation === undefined){
-		
-			const error_msg = "donation was not defined for donation_id '" + donation_id + "' while processing team with team_id '"  + team_id + "'";
-		
-			console.error(error_msg);
-		
-			throw new Error(error_msg);
-		}
-		else {
-
-			donation_list.push(donation);
-		}
-	});
-
-	return donation_list;
+	return donations;	
 }
 
-function _get_person_list_by_team(team){
+function _get_person_list_by_team_id(team_id){
 
-	const person_id_list = team.member_ids;
+	const persons = Persons.find({"team_id" : team_id}, {"_id" : 0});
 
-	let person_list = [];
-
-	const team_id = team.team_id;
-
-	person_id_list.forEach(function(person_id){
-
-		person_id = parseInt(person_id);
-
-		let person = Persons.findOne({"person_id" : person_id}, {"_id" : 0});
-
-		if (person === undefined){
-		
-			const error_msg = "person was not defined for person_id '" + person_id + "' while processing team with team_id '"  + team_id + "'";
-		
-			console.error(error_msg);
-		
-			throw new Error(error_msg);
-		}
-		else {
-
-			person_list.push(person);
-		}
-	});
-
-	return person_list;
+	return persons;
 }
 
-function _get_plant_list_by_team(team){
+function _get_plant_list_by_team_id(team_id){
 
-	const plant_id_list = team.plant_ids;
+	const plants = Plants.find({"team_id": team_id}, {"_id" : 0});
 
-	const team_id = team.team_id;
-	
-	let plant_list = [];
-
-	plant_id_list.forEach(function(plant_id){
-
-		let plant = Plants.findOne({"plant_id" : plant_id}, {"_id" : 0});
-
-		if (plant === undefined){
-		
-			const error_msg = "plant was not defined for plant_id '" + plant_id + "' while processing team with team_id '"  + team_id + "'";
-		
-			console.error(error_msg);
-		
-			throw new Error(error_msg);
-		}
-		else {
-
-			plant_list.push(plant);
-		}
-	});
-
-	return plant_list;
+	return plants;
 }
 
 Template.TeamDetails.events({});

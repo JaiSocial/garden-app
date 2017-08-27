@@ -21,7 +21,7 @@ Template.SeasonDetails.helpers({
 		
 		let season = _get_season_by_season_id(season_id);
 
-		const team_list = _get_team_list_by_season(season);
+		const team_list = _get_team_list_by_season_id(season_id);
 
 		season.team_list = team_list;
 
@@ -86,33 +86,39 @@ Template.SeasonDetails.helpers({
 	// }
 });
 
-function _get_team_list_by_season(season){
+function _get_team_list_by_season_id(season_id){
 
-	const team_id_list = season.team_ids;
+	if (season_id === undefined){
+	
+		const error_msg = "season_id was not defined";
+	
+		console.error(error_msg);
+	
+		throw new Error(error_msg);
+	}		
+
+	const teams = Teams.find({"season_id" : season_id}, {"name": 1, "plot_number" : 1, "team_id" : 1, "_id" : 0});
+
+	if (teams === undefined){
+	
+		const error_msg = "teams was not defined";
+	
+		console.error(error_msg);
+	
+		throw new Error(error_msg);
+	}		
 
 	let team_list = [];
 
-	team_id_list.forEach(function(team_id){
+	teams.forEach(function(team){
 
-		let team = Teams.findOne({"team_id" : team_id}, {"name": 1, "plot_number" : 1, "team_id" : 1, "_id" : 0});
-
-		if (team === undefined){
-		
-			const error_msg = "team was not defined for team_id '"  + team_id + "'";
-		
-			console.error(error_msg);
-		
-			throw new Error(error_msg);
-		}		
-
-		team.donation_sum = _get_donation_sum_by_team(team);
+		team.donation_sum = _get_donation_sum_by_team_id(team.team_id);
 
 		team_list.push(team);
 	});
 
 	return team_list;
 }
-
 
 function _get_season_by_season_id(season_id){
 
@@ -139,9 +145,9 @@ function _get_season_by_season_id(season_id){
 	return season;
 }
 
-function _get_donation_sum_by_team(team){
+function _get_donation_sum_by_team_id(team_id){
 
-	if (team === undefined){
+	if (team_id === undefined){
 	
 		const error_msg = "team was not defined";
 	
@@ -150,35 +156,17 @@ function _get_donation_sum_by_team(team){
 		throw new Error(error_msg);
 	}		
 
-	const donation_ids = team.donation_ids;
+	const donations = Donations.find({"team_id" : team_id}, {"weight" : 1, "_id" : 0});
 
 	let donation_sum = 0;
 
-	if ((donation_ids !== undefined) && (donation_ids.length > 0)){
+	donations.forEach(function(donation){
 
-		donation_ids.forEach(function(donation_id){
-
-			const donation = Donations.findOne({"donation_id" : donation_id}, {"weight" : 1, "_id" : 0});
-
-			if (donation === undefined){
-			
-				const error_msg = "donation was not defined for donation_id '" + donation_id + "'";
-			
-				console.error(error_msg);
-			
-				// throw new Error(error_msg);			
-			}		
-			else {
-				donation_sum += donation.weight;
-			}
-		});
-	}
+		donation_sum += donation.weight;
+	});
 
 	return donation_sum;
 }
-
-
-
 
 // 	if (_team_id_to_donation_sum_lookup[team_id] !== undefined){
 

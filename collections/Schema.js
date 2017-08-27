@@ -78,9 +78,6 @@ SeasonSchema = new SimpleSchema({
 	end_month: {
 		type : Number,
 		label : 'End Month'
-	},
-	team_ids : {
-		type : [Number]
 	}
 });
 
@@ -120,6 +117,10 @@ PersonSchema = new SimpleSchema({
 		type: Boolean,
 		label: 'Obsolete',
 		defaultValue: false
+	},
+	team_id : {
+		type : Number,
+		label: "Team ID"
 	}
 });
 
@@ -146,6 +147,10 @@ DonationSchema = new SimpleSchema({
 	date : {
 		type : String,
 		label : 'Date'
+	},
+	team_id : {
+		type : Number,
+		label : 'Team ID'
 	}
 });
 
@@ -181,12 +186,6 @@ TeamsSchema = new SimpleSchema({
 	season_id : {
 		type : Number,
 		label : 'Season ID'
-	},
-	member_ids: {
-		type : [Number]
-	},
-	donation_ids: {
-		type : [Number]
 	},
 	plant_ids: {
 		type : [Number]

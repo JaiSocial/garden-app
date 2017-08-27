@@ -1,28 +1,28 @@
 db.garden_app_seasons.remove({});
 
 db.garden_app_seasons.insertMany([
-	{season_id: 1, name: "Summer 2017", desc: "Summer Growing Season 2017", start_year: 2017, end_year: 2017, start_month: 6, end_month: 10, team_ids : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]}
+	{season_id: 1, name: "Summer 2017", desc: "Summer Growing Season 2017", start_year: 2017, end_year: 2017, start_month: 6, end_month: 10}
 ]);
 
 db.garden_app_teams.remove({});
 
 db.garden_app_teams.insertMany([
-	{team_id: 1, name: "garden team 1", "season_id": 1, "member_ids" : [1,2,3], "donation_ids": [1,2,3], "plant_ids": [1,2,3], "plot_number" : 1},
-	{team_id: 2, name: "garden team 2", "season_id": 1, "member_ids" : [3,4,5], "donation_ids": [4,5,6], "plant_ids": [1,2,3], "plot_number" : 2},
-	{team_id: 3, name: "garden team 3", "season_id": 1, "member_ids" : [6,7,8], "donation_ids": [6,7,8], "plant_ids": [1,2,3], "plot_number" : 3},
-	{team_id: 4, name: "garden team 4", "season_id": 1, "member_ids" : [9,10,11], "donation_ids": [9,10,11], "plant_ids": [1,2,3], "plot_number" : 4},
-	{team_id: 5, name: "garden team 5", "season_id": 1, "member_ids" : [12,13,14], "donation_ids": [12,13,14], "plant_ids": [1,2,3], "plot_number" : 5},
-	{team_id: 6, name: "garden team 6", "season_id": 1, "member_ids" : [15,16,17], "donation_ids": [15,16,17], "plant_ids": [1,2,3], "plot_number" : 6},
-	{team_id: 7, name: "garden team 7", "season_id": 1, "member_ids" : [18,19,20], "donation_ids": [18,19,20], "plant_ids": [1,2,3], "plot_number" : 7},
-	{team_id: 8, name: "garden team 8", "season_id": 1, "member_ids" : [21,22,23], "donation_ids": [21,22,23], "plant_ids": [1,2,3], "plot_number" : 8},
-	{team_id: 9, name: "garden team 9", "season_id": 1, "member_ids" : [24,25,26], "donation_ids": [24,25,26], "plant_ids": [1,2,3], "plot_number" : 9},
-	{team_id: 10, name: "garden team 10", "season_id": 1, "member_ids" : [27,28,29], "donation_ids": [27,28,29], "plant_ids": [1,2,3], "plot_number" : 10},
-	{team_id: 11, name: "garden team 11", "season_id": 1, "member_ids" : [30,31,32], "donation_ids": [30,31,32], "plant_ids": [1,2,3], "plot_number" : 11},
-	{team_id: 12, name: "garden team 12", "season_id": 1, "member_ids" : [33,34,35], "donation_ids": [33,34,35], "plant_ids": [1,2,3], "plot_number" : 12},
-	{team_id: 13, name: "garden team 13", "season_id": 1, "member_ids" : [36,37,38], "donation_ids": [36,37,38], "plant_ids": [1,2,3], "plot_number" : 13},
-	{team_id: 14, name: "garden team 14", "season_id": 1, "member_ids" : [39,40,41], "donation_ids": [39,40,41], "plant_ids": [1,2,3], "plot_number" : 14},
-	{team_id: 15, name: "garden team 15", "season_id": 1, "member_ids" : [42,43,44], "donation_ids": [42,43,44], "plant_ids": [1,2,3], "plot_number" : 15},
-	{team_id: 16, name: "garden team 16", "season_id": 1, "member_ids" : [45,46,47], "donation_ids": [45,46,47], "plant_ids": [1,2,3], "plot_number" : 16},	
-	{team_id: 17, name: "garden team 17", "season_id": 1, "member_ids" : [48,49,50], "donation_ids": [48,49,50], "plant_ids": [1,2,3], "plot_number" : 17}
+	{team_id: 1, name: "garden team 1", "season_id": 1, "plot_number" : 1},
+	{team_id: 2, name: "garden team 2", "season_id": 1, "plot_number" : 2},
+	{team_id: 3, name: "garden team 3", "season_id": 1, "plot_number" : 3},
+	{team_id: 4, name: "garden team 4", "season_id": 1, "plot_number" : 4},
+	{team_id: 5, name: "garden team 5", "season_id": 1, "plot_number" : 5},
+	{team_id: 6, name: "garden team 6", "season_id": 1, "plot_number" : 6},
+	{team_id: 7, name: "garden team 7", "season_id": 1, "plot_number" : 7},
+	{team_id: 8, name: "garden team 8", "season_id": 1, "plot_number" : 8},
+	{team_id: 9, name: "garden team 9", "season_id": 1, "plot_number" : 9},
+	{team_id: 10, name: "garden team 10", "season_id": 1, "plot_number" : 10},
+	{team_id: 11, name: "garden team 11", "season_id": 1, "plot_number" : 11},
+	{team_id: 12, name: "garden team 12", "season_id": 1, "plot_number" : 12},
+	{team_id: 13, name: "garden team 13", "season_id": 1, "plot_number" : 13},
+	{team_id: 14, name: "garden team 14", "season_id": 1, "plot_number" : 14},
+	{team_id: 15, name: "garden team 15", "season_id": 1, "plot_number" : 15},
+	{team_id: 16, name: "garden team 16", "season_id": 1, "plot_number" : 16},	
+	{team_id: 17, name: "garden team 17", "season_id": 1, "plot_number" : 17}
 ]);
 

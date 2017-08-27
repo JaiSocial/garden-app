@@ -5,6 +5,8 @@ mongodb_url = '127.0.0.1'
 mongodb_port = '3001'
 mongodb_connection_url = 'mongodb://' + mongodb_url + ':' + mongodb_port + '/meteor'
 
+MAX_TEAM_NUMBER = 17
+MIN_TEAM_NUMBER = 1
 
 test_mode = False
 
@@ -14,6 +16,9 @@ donations_list = []
 
 def generate_donation_documents():
 
+    team_id = MIN_TEAM_NUMBER
+
+    donation_ctr = 1
 
     for i in range(50):
 
@@ -28,12 +33,23 @@ def generate_donation_documents():
             "donation_id" : donation_id,
             "desc"        : desc,
             "weight"      : weight,
-            "date"        : date
+            "date"        : date,
+            "team_id"     : team_id
         }
 
         donations_list.append(donation)
 
+        if donation_ctr == 10:
+            
+            team_id += 1
+            
+            donation_ctr = 1
 
+            if team_id >= MAX_TEAM_NUMBER:
+                team_id = MIN_TEAM_NUMBER
+            
+        else:
+            donation_ctr += 1
 
 def insert_donation_documents():
     '''

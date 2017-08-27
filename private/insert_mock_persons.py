@@ -15,6 +15,9 @@ persons_list = []
 def generate_person_documents():
 
 
+    team_id = 1
+    member_ctr = 1
+
     for i in range(50):
 
         string_i = str(i)
@@ -32,17 +35,24 @@ def generate_person_documents():
             role = 'member'
 
         person = {
-            "person_id" : person_id,
-            "first_name" : first_name,
-            "last_name" : last_name,
+            "person_id"      : person_id,
+            "first_name"     : first_name,
+            "last_name"      : last_name,
             "phone_number_1" : phone_1,
             "phone_number_2" : phone_2,
-            "email_address" : email,
-            "role" : role
+            "email_address"  : email,
+            "role"           : role,
+            "team_id"        : team_id
         }
 
 
         persons_list.append(person)
+
+        if member_ctr == 10:
+            team_id += 1
+            member_ctr = 1
+        else:
+            member_ctr += 1 
 
 
 
