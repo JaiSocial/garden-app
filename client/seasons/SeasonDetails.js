@@ -5,7 +5,7 @@ Template.SeasonDetails.onCreated(function (){
 		self.subscribe('garden_app_seasons');
 		self.subscribe('garden_app_donations');
 		self.subscribe('garden_app_teams');
-	})
+	});
 });
 
 
@@ -18,7 +18,7 @@ Template.SeasonDetails.helpers({
 		const id = FlowRouter.getParam('id');
 
 		season_id = parseInt(id);
-
+		
 		let season = _get_season_by_season_id(season_id);
 
 		const team_list = _get_team_list_by_season(season);
