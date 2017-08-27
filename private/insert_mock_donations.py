@@ -19,7 +19,7 @@ def generate_donation_documents():
 
         string_i = str(i)
 
-        donation_id  = string_i
+        donation_id  = i
         desc         = 'donation description ' + string_i
         weight       = 10
         date         = 'Aug 12, 2017'
